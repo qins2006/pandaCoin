@@ -6,10 +6,10 @@
 
 ------
 
-panda一款基于海豚BaaS平台快速开发的一套区块链系统。基于平台更简单的区块链数据服务。以更少的代价更低的学习成本，快速实现真正的区块链应用。这里以熊猫币为例子实现数字货币系统的大部分功能。
-本文档的受众群体为 有一定的数字货币基础的开发人员。
+panda一款基于海豚BaaS平台快速开发的一套区块链系统。基于平台更简单的区块链数据服务。以更少的代价更低的学习成本，快速实现真正的区块链应用。这里以熊猫币为例子实现数字货币系统的大部分功能。  
+本文档的受众群体为 有一定的数字货币基础的开发人员。  
 
-其功能主要实现：
+其功能主要实现：  
 
 > * ECDSA钱包
 > * 交易客户端类
@@ -23,25 +23,25 @@ panda一款基于海豚BaaS平台快速开发的一套区块链系统。基于�
 
 ## 文档目录
 
- 1. 如何对接HiteBaaS平台
- 2. 项目说明（如何开发自己的数字货币系统）
- 3. 接口文档
+ 1. 如何对接HiteBaaS平台  
+ 2. 项目说明（如何开发自己的数字货币系统）  
+ 3. 接口文档  
 
 
-#对接HiteBaaS平台
-官网： https://www.hitebaas.com
-申请入驻平台： https://www.hitebaas.com/hitebaas/index/apply.html
-企业申请指南：该页面简述了如何对接平台，最简单的话可直接联系页面最下方的邮箱地址 hitebaas@synctech.net.cn ，会有专人客服和你对接。正如平台所说“以更少的代价更低的学习成本”便可创建自己的区块链应用。
+#对接HiteBaaS平台  
+官网： https://www.hitebaas.com  
+申请入驻平台： https://www.hitebaas.com/hitebaas/index/apply.html  
+企业申请指南：该页面简述了如何对接平台，最简单的话可直接联系页面最下方的邮箱地址 hitebaas@synctech.net.cn ，会有专人客服和你对接。正如平台所说“以更少的代价更低的学习成本”便可创建自己的区块链应用。  
+  
+在平台下方“API工具下载” ，下载工具 hitebaas-api-0.0.1-SNAPSHOT.jar。  
+或者点击链接下载：https://www.hitebaas.com/hitebaas/index/api.zip  
 
-在平台下方“API工具下载” ，下载工具 hitebaas-api-0.0.1-SNAPSHOT.jar。
-或者点击链接下载：https://www.hitebaas.com/hitebaas/index/api.zip
-
-和平台人员对接后：
-1、确认数据格式。 
-2、获得平台给的appId、appKey、secretKey（这很重要，后面将使用这三个字符串和平台数据交互）。
-3、登录入驻企业后台，下载区块更新节点（后续会讲到如何从该节点上获取本项目相关的交易）。
-
-pandaCoin 入驻HiteBaaS的约定数据字段如下（仅供参考）
+和平台人员对接后：  
+1、确认数据格式。   
+2、获得平台给的appId、appKey、secretKey（这很重要，后面将使用这三个字符串和平台数据交互）。  
+3、登录入驻企业后台，下载区块更新节点（后续会讲到如何从该节点上获取本项目相关的交易）。  
+  
+pandaCoin 入驻HiteBaaS的约定数据字段如下（仅供参考）  
 
 | 数据英文名称        | 数据中文名称   | 
 | --------   | -----:  | 
@@ -77,28 +77,28 @@ maven项目引入：
 DataHelper<TradeEntity> dataHelper = new DataHelper<TradeEntity>();
 boolean b = dataHelper.send(tradeEntity, appId, appKey, secretKey, null);
 ```
-panda-server(项目后台)将使用该工具包和HiteBaaS平台交互。
+panda-server(项目后台)将使用该工具包和HiteBaaS平台交互。  
 
-与平台的人员联调下TradeEntity的数据格式没问题，能打包上链就OK了，到这里和平台相关的对接工作就节本完成了。
-
+与平台的人员联调下TradeEntity的数据格式没问题，能打包上链就OK了，到这里和平台相关的对接工作就节本完成了。  
+ 
 #项目说明
 涉及到的一些技术： maven、spring boot、mongoDB
 
 **项目结构说明：**
 > 
-panda-all
----- panda-client
----- panda-common
----- panda-parent
----- panda-server
----- pom.xml
+panda-all  
+---- panda-client  
+---- panda-common  
+---- panda-parent  
+---- panda-server  
+---- pom.xml  
 
-panda-client : 模拟App钱包客户端，用于向系统后台（panda-server）发送交易。
-panda-common ： 一些公共的模型、工具类。
-panda-parent :  版本管理。
-panda-server ：项目核心后台。
+panda-client : 模拟App钱包客户端，用于向系统后台（panda-server）发送交易。  
+panda-common ： 一些公共的模型、工具类。   
+panda-parent :  版本管理。  
+panda-server ：项目核心后台。  
 **1、交易客户端类**
-项目里将使用它模拟APP移动客户端端。
+项目里将使用它模拟APP移动客户端端。  
 ```
 /**
 	 * 模拟发送交易工具
@@ -179,17 +179,17 @@ panda-common项目的测试类Test.java
 		}
 	}
 ```
-该方法将生成地址、公钥、私钥。
-如：app客户端上生成，则把它们保存在app移动端。由用户自己保管自己的秘钥。
+该方法将生成地址、公钥、私钥。  
+如：app客户端上生成，则把它们保存在app移动端。由用户自己保管自己的秘钥。  
 
-**3、创建主币种panda币**
-***（主币在项目启动之初就应该创建，项目保证了只能创建名为panda的主币种且只能创建一次，开发者可根据自己的需要去更改名称）***
-所有交易包括创建币种、交易。都将通过上诉和平台约定的字段来提现。
-我们这里做个共识。
-字段 type（交易种类）等于 1时，为创建币种交易。
-满足条件fromAddress(转出地址)=toAddress（转入地址），amount（交易额）为币种初始量。
-主币种：创建主币时coinType='panda',gasCoinType='panda'币。
-panda-client项目的CreateCoin单元测试方法。
+**3、创建主币种panda币**  
+***（主币在项目启动之初就应该创建，项目保证了只能创建名为panda的主币种且只能创建一次，开发者可根据自己的需要去更改名称）***  
+所有交易包括创建币种、交易。都将通过上诉和平台约定的字段来提现。  
+我们这里做个共识。 
+字段 type（交易种类）等于 1时，为创建币种交易。  
+满足条件fromAddress(转出地址)=toAddress（转入地址），amount（交易额）为币种初始量。  
+主币种：创建主币时coinType='panda',gasCoinType='panda'币。  
+panda-client项目的CreateCoin单元测试方法。  
 ```
 /**
 	 * 创建主币种panda币（熊猫币）
@@ -226,8 +226,8 @@ panda-client项目的CreateCoin单元测试方法。
 		}
 	}
 ```
-**4、子币种：**
-创建币种时coinType='panda',gasCoinType='子币种名称'币并且需消耗1000panda币作为燃油费。
+**4、子币种：**  
+创建币种时coinType='panda',gasCoinType='子币种名称'币并且需消耗1000panda币作为燃油费。  
 
 ```
 /**
@@ -266,8 +266,8 @@ panda-client项目的CreateCoin单元测试方法。
 		}
 	}
 ```
-**5、转账交易：与各种主流币类似。**
-主币/子币交易：
+**5、转账交易：与各种主流币类似。**  
+主币/子币交易：  
 ```
 /**
 	 * 币种交易
@@ -308,30 +308,29 @@ panda-client项目的CreateCoin单元测试方法。
 		}
 	}
 ```
-**6、企业区块更新**
-在官网上 登录 企业自己的后台，下载自己企业的HiteBaaS更新节点 hitebaas-client.rar
-
-> 启动企业节点步骤：
-1：打开enterprise.txt文件夹，将对应的appId,appKey,secretKey的xx换成对应项目的值，appId,appKey,secretKey可在个人中心
-     对应项目点查询里得到
-2：执行sh脚本
-
-执行脚本后本地便开始更新自己企业的区块（如果自己数据量多的话请保证磁盘容量充足）。
-
-**该节点提供了一个接口。（这是重中之重），我们的一切交易都将由这个接口来确认是否成功上链。**
-后台项目panda-server会启动一个定时器BlockUpdateTimer.java 去轮询访问这个本地接口，获取交易队列。
-并将交易的信息，保存/更新至 MongoDB（以供所有app用户查询查询）。
-
-**7、通用数据查询接口**
-后台项目panda-server提供给App用户的查询接口。
-请求方式：GET。
-> http://localhost:8080/panda-server/data/要查询的43位地址@币种名称
- 如下查询地址 0x4173c715a814a30c9167d24aeb01aaef 有多少Deer 币：
- http://localhost:8080/panda-server/data/0x4173c715a814a30c9167d24aeb01aaef@Deer
- 如下查询地址 0x4173c715a814a30c9167d24aeb01aaef panda 币：
- http://localhost:8080/panda-server/data/0x4173c715a814a30c9167d24aeb01aaef@panda
-
-正常返回余额数据如下：
+**6、企业区块更新**  
+在官网上 登录 企业自己的后台，下载自己企业的HiteBaaS更新节点 hitebaas-client.rar  
+  
+> 启动企业节点步骤：  
+1：打开enterprise.txt文件夹，将对应的appId,appKey,secretKey的xx换成对应项目的值，appId,appKey,secretKey可在个人中心对应项目点查询里得到    
+2：执行sh脚本  
+  
+执行脚本后本地便开始更新自己企业的区块（如果自己数据量多的话请保证磁盘容量充足）。  
+  
+**该节点提供了一个接口。（这是重中之重），我们的一切交易都将由这个接口来确认是否成功上链。**  
+后台项目panda-server会启动一个定时器BlockUpdateTimer.java 去轮询访问这个本地接口，获取交易队列。  
+并将交易的信息，保存/更新至 MongoDB（以供所有app用户查询查询）。  
+ 
+**7、通用数据查询接口**  
+后台项目panda-server提供给App用户的查询接口。  
+请求方式：GET。  
+> http://localhost:8080/panda-server/data/要查询的43位地址@币种名称  
+ 如下查询地址 0x4173c715a814a30c9167d24aeb01aaef 有多少Deer 币：  
+ http://localhost:8080/panda-server/data/0x4173c715a814a30c9167d24aeb01aaef@Deer  
+ 如下查询地址 0x4173c715a814a30c9167d24aeb01aaef panda 币：  
+ http://localhost:8080/panda-server/data/0x4173c715a814a30c9167d24aeb01aaef@panda  
+  
+正常返回余额数据如下：  
 ```
 {
    "code": 0,
