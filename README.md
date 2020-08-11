@@ -56,11 +56,11 @@ pandaCoin 入驻HiteBaaS的约定数据字段如下（仅供参考）
 | sign       |    签名    |
 | publickey       |    公钥    |
 
-对应项目内java类名TradeEntity。
+对应项目内java类名TradeEntity。  
 
-**引入工具类 hitebaas-api-0.0.1-SNAPSHOT.jar。**
+**引入工具类 hitebaas-api-0.0.1-SNAPSHOT.jar。**   
 
-将包安装到本地仓库：
+将包安装到本地仓库：  
 ```
 mvn install:install-file -DgroupId=com.hitebaas -DartifactId=hitebaas-api -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar -Dfile=hitebaas-api-0.0.1-SNAPSHOT.jar
 ``` 
@@ -84,7 +84,7 @@ panda-server(项目后台)将使用该工具包和HiteBaaS平台交互。
 #项目说明
 涉及到的一些技术： maven、spring boot、mongoDB
 
-**项目结构说明：**
+**项目结构说明：**  
 > 
 panda-all  
 ---- panda-client  
@@ -97,8 +97,8 @@ panda-client : 模拟App钱包客户端，用于向系统后台（panda-server�
 panda-common ： 一些公共的模型、工具类。   
 panda-parent :  版本管理。  
 panda-server ：项目核心后台。  
-**1、交易客户端类**
-项目里将使用它模拟APP移动客户端端。  
+**1、交易客户端类**  
+项目里将使用它模拟APP移动客户端端。    
 ```
 /**
 	 * 模拟发送交易工具
@@ -151,8 +151,8 @@ panda-server ：项目核心后台。
         return false;
 	}
 ```
-**2、创建钱包**
-panda-common项目的测试类Test.java
+**2、创建钱包**  
+panda-common项目的测试类Test.java  
 ```
 @org.junit.Test
 	public void test() {
