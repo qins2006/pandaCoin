@@ -115,7 +115,7 @@ public class PandaController extends BaseController{
 						if(!pandaMainCoin.equals(coinType)) {
 							throw new Exception("主币名称不对");
 						}
-						//sendTrade(tradeEntity);
+						sendTrade(tradeEntity);
 						pandaC = new Coin();
 						pandaC.setBlockIndex("-1");
 						pandaC.setCoinName(pandaMainCoin);
