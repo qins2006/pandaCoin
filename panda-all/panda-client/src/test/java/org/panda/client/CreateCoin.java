@@ -14,24 +14,27 @@ public class CreateCoin {
 	@org.junit.Test
 	public void createPanda() {
 		try {
+			//私钥
 			String privateKey = "MEECAQAwEwYHKoZIzj0CAQYIKoZIzj0DAQcEJzAlAgEBBCBDeowxYhK+Qkrv9ScbY1qtRXMvZFxeFmUNxOzEgq6VuA==";
+			//公钥
 			String publicKey= "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/5xeVT8EEdauYQUs5KV21Ozv9xmWzyMDoGaFg9ywyAcAoawz+Aj0ius4jyvjy+wGnafelonUYJHoC/bOroQiFw==";
+			//地址
 			String address = "0x4173c715a814a30c9167d24aeb01aaef";
 			
 			HTTPHelper httpHelper = new HTTPHelper();
 			TradeEntity te = new TradeEntity();
-			te.setAmount("10000000");
-			te.setCoinType("panda");
-			te.setFromAddress(address);
-			te.setGas("0");
-			te.setGasCoinType("panda");
-			te.setToAddress(address);
-			te.setType("1");
-			te.setTradehash(te.md5Tradehash());
-			te.setPublickey(publicKey);
-			String sign = ECDSAUtils.sign(te.getTradehash().getBytes("UTF-8"), privateKey);
+			te.setAmount("10000000");//主币种初始额
+			te.setCoinType("panda");//主币种名称
+			te.setFromAddress(address);//转出地址
+			te.setGas("0");//主币种这里为0.
+			te.setGasCoinType("panda");//gas币种也为0
+			te.setToAddress(address);//转入地址=转出地址
+			te.setType("1");//交易类型1
+			te.setTradehash(te.md5Tradehash());//生成交易哈希
+			te.setPublickey(publicKey);//公钥
+			String sign = ECDSAUtils.sign(te.getTradehash().getBytes("UTF-8"), privateKey);//签名
 			te.setSign(sign);
-			
+			//发送创建主币交易至项目后台，后台转发至HiteBaas平台
 			boolean b = HTTPHelper.sendTrade(te);
 			if(b) {
 				System.out.println(b);
@@ -46,23 +49,27 @@ public class CreateCoin {
 	@org.junit.Test
 	public void createDeer() {
 		try {
+			//私钥
 			String privateKey = "MEECAQAwEwYHKoZIzj0CAQYIKoZIzj0DAQcEJzAlAgEBBCBDeowxYhK+Qkrv9ScbY1qtRXMvZFxeFmUNxOzEgq6VuA==";
+			//公钥
 			String publicKey= "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/5xeVT8EEdauYQUs5KV21Ozv9xmWzyMDoGaFg9ywyAcAoawz+Aj0ius4jyvjy+wGnafelonUYJHoC/bOroQiFw==";
+			//地址
 			String address = "0x4173c715a814a30c9167d24aeb01aaef";
 			
 			HTTPHelper httpHelper = new HTTPHelper();
 			TradeEntity te = new TradeEntity();
-			te.setAmount("1000000");
-			te.setCoinType("Deer");
-			te.setFromAddress(address);
-			te.setGas("1000");
-			te.setGasCoinType("panda");
-			te.setToAddress(address);
-			te.setType("1");
-			te.setTradehash(te.md5Tradehash());
-			te.setPublickey(publicKey);
-			String sign = ECDSAUtils.sign(te.getTradehash().getBytes("UTF-8"), privateKey);
+			te.setAmount("1000000");//初始币额
+			te.setCoinType("Deer");//子币种名称
+			te.setFromAddress(address);//创建地址（初始额接收地址）
+			te.setGas("1000");//消耗1000的panda币作为gas
+			te.setGasCoinType("panda");//使用主币种作为燃油费
+			te.setToAddress(address);//转出地址=转入地址
+			te.setType("1");//交易类型为1
+			te.setTradehash(te.md5Tradehash());//生成交易哈希值
+			te.setPublickey(publicKey);//公钥
+			String sign = ECDSAUtils.sign(te.getTradehash().getBytes("UTF-8"), privateKey);//签名
 			te.setSign(sign);
+			//发送创建主币交易至项目后台，后台转发至HiteBaas平台
 			boolean b = HTTPHelper.sendTrade(te);
 			if(b) {
 				System.out.println(b);
@@ -71,7 +78,9 @@ public class CreateCoin {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 币种交易
+	 */
 	@org.junit.Test
 	public void trade() {
 		
@@ -87,17 +96,18 @@ public class CreateCoin {
 			HTTPHelper httpHelper = new HTTPHelper();
 			TradeEntity te = new TradeEntity();
 			te.setAmount("10.02");//转账币额
-			te.setCoinType("Deer");
-			te.setFromAddress(address);
+			te.setCoinType("Deer");//币种名称，如果这里是主币转账的话则为  panda
+			te.setFromAddress(address);//转出地址
 			te.setGas("0.0052");//gas
 			//te.setGasCoinType("panda");
-			te.setGasCoinType("panda");
-			te.setToAddress(address0);
-			te.setType("0");
-			te.setTradehash(te.md5Tradehash());
-			te.setPublickey(publicKey);
-			String sign = ECDSAUtils.sign(te.getTradehash().getBytes("UTF-8"), privateKey);
+			te.setGasCoinType("panda");//使用主币作为燃油费
+			te.setToAddress(address0);//转入地址
+			te.setType("0");//交易类型0
+			te.setTradehash(te.md5Tradehash());//生成交易哈希
+			te.setPublickey(publicKey);//转出公钥
+			String sign = ECDSAUtils.sign(te.getTradehash().getBytes("UTF-8"), privateKey);//使用转出私钥签名
 			te.setSign(sign);
+			//发送创建主币交易至项目后台，后台转发至HiteBaas平台
 			boolean b = HTTPHelper.sendTrade(te);
 			if(b) {
 				System.out.println(b);
@@ -106,6 +116,4 @@ public class CreateCoin {
 			e.printStackTrace();
 		}
 	}
-	
-	
 }
